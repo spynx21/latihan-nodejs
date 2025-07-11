@@ -1,7 +1,7 @@
 pipeline{
     agent none
     environment{
-        dockerhub = credentials ('dockerlogin')
+        docker = credentials ('dockerlogin')
     }
     stages{
         stage ('build aplication'){
@@ -22,9 +22,9 @@ pipeline{
                 }
             }
             steps{
-                sh 'docker build -t risvan21/apknode:0.1 .'
-                sh 'echo "$dockerhub_psw" | docker login -u "$dockerhub_usr" --password-stdin'
-                sh 'docker push risvan21/apknode:0.1'
+                sh 'docker build -t risvan21/apknoded:0.1 .'
+                sh 'echo $docker_PSW | docker login -u $docker_USR --password-stdin'
+                sh 'docker push risvan21/apknoded:0.1'
             }
         }
         stage ('deploy aplication'){
