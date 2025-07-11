@@ -23,7 +23,7 @@ pipeline{
             }
             steps{
                 sh 'docker build -t risvan21/apknode:0.1 .'
-                sh 'echo $dockerhub_psw | docker login -u $dockerhub_usr --password-stdin'
+                sh 'echo "$dockerhub_psw" | docker login -u "$dockerhub_usr" --password-stdin'
                 sh 'docker push risvan21/apknode:0.1'
             }
         }
