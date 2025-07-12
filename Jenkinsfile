@@ -36,7 +36,7 @@ pipeline{
             }
             steps{
                 withCredentials([sshUserPrivateKey(credentialsId: "ssh", KeyFileVariable:"keyfile")]){
-                    sh 'ssh ipan@172.20.10.2 -i ${keyfile} -o StrictHostKeyChecking=no "echo $dockerhub_psw | docker login -u $dockerhub_usr --password-stdin"'
+                    sh 'ssh ipan@172.20.10.2 -i ${keyfile} -o StrictHostKeyChecking=no "echo $docker_PSW | docker login -u $docker_USR --password-stdin"'
                     sh 'ssh ipan@172.20.10.2 -i ${keyfile} -o StrictHostKeyChecking=no docker pull image risvan21/apknode:0.1'
                     sh 'ssh ipan@172.20.10.2 -i ${keyfile} -o StrictHostKeyChecking=no docker rm --force mongodb'
                     sh 'ssh ipan@172.20.10.2 -i ${keyfile} -o StrictHostKeyChecking=no docker run --detach --name mongo -p 27017:27017 mongo:3'
